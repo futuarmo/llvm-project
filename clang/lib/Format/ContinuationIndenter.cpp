@@ -367,7 +367,10 @@ bool ContinuationIndenter::mustBreak(const LineState &State) {
        (!Style.BreakBeforeTernaryOperators &&
         Previous.is(TT_ConditionalExpr))) &&
       State.Stack.back().BreakBeforeParameter && !Current.isTrailingComment() &&
-      !Current.isOneOf(tok::r_paren, tok::r_brace))
+      !Current.isOneOf(tok::r_paren, tok::r_brace) &&
+      ((State.Line->Type == LT_ImportStatement &&
+        Style.JavaScriptWrapImports) ||
+      State.Line->Type != LT_ImportStatement))
     return true;
   if (State.Stack.back().IsChainedConditional &&
       ((Style.BreakBeforeTernaryOperators && Current.is(TT_ConditionalExpr) &&
