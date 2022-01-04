@@ -1975,6 +1975,10 @@ TEST_F(FormatTestJS, ImportWrapping) {
                "  }    from\n"
                "      'some/path/longer/than/column/limit/module.js'  ; ",
                Style);
+  Style.ColumnLimit = 0;
+  Style.JavaScriptWrapImports = false;
+  verifyFormat("import {aaa, bbb, ccc} from 'abc';",
+               "import {aaa, bbb, ccc} from 'abc';", Style);
 }
 
 TEST_F(FormatTestJS, TemplateStrings) {
