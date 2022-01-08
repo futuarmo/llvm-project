@@ -4804,6 +4804,14 @@ TEST_F(FormatTest, MacroCallsWithoutTrailingSemicolon) {
                Style);
 }
 
+TEST_F(FormatTest, FormatMacroWithZeroColumnWidth) {
+  FormatStyle ZeroColumn = getLLVMStyleWithColumns(0);
+
+  verifyFormat("#define STRINGIFY(t) #t\n"
+               "#define MAKEVERSIONSTRING(x, y, z, build) STRINGIFY(x) \".\" STRINGIFY(y) \".\" STRINGIFY(z) \".\" STRINGIFY(build)\n",
+               ZeroColumn);
+}
+
 TEST_F(FormatTest, LayoutMacroDefinitionsStatementsSpanningBlocks) {
   verifyFormat("#define A \\\n"
                "  f({     \\\n"
