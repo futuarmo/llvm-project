@@ -4807,10 +4807,8 @@ TEST_F(FormatTest, MacroCallsWithoutTrailingSemicolon) {
 TEST_F(FormatTest, FormatMacroWithZeroColumnWidth) {
   FormatStyle ZeroColumn = getLLVMStyleWithColumns(0);
 
-  // clang-format off
   verifyFormat("#define A LOOOOOOOOOOOOOOOOOOONG() LOOOOOOOOOOOOOOOOOOONG()\n",
                ZeroColumn);
-  // clang-format on
 }
 
 TEST_F(FormatTest, LayoutMacroDefinitionsStatementsSpanningBlocks) {
